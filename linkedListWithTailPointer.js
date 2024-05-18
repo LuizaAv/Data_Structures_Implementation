@@ -76,7 +76,7 @@ class LinkedList{
             this.head = null
             this.tail = null
         }else{
-            const element = this.head
+            let element = this.head
             while(element.next !== this.tail){
                 element = element.next
             }
