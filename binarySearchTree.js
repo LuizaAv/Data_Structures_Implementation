@@ -56,6 +56,37 @@ class BinarySearchTree{
         }
     }
 
+    delete(value){
+        this.root = this.deleteRecursively(this.root, value)
+    }
+
+    deleteRecursively(node, value){
+        if(node === null){
+            return node
+        }
+
+        if(value < node.value){
+            node.left = this.deleteRecursively(node.left, value)
+        }else if(value > node.value){
+            node.right = this.deleteRecursively(node.right, value)
+        } else{
+            if(!node.left && !node.right){
+                return null
+            }
+
+            if(!node.left){
+                return node.right
+            }else if(!node.right){
+                return node.left
+            }
+
+            node.value = this.min(node.right)
+            node.right = this.deleteRecursively(node.right, value)
+        }
+
+        return node
+    }
+
     //DFS traversal
 
     treeTraversePreorder(node){
@@ -133,11 +164,14 @@ class BinarySearchTree{
 // bsTree.insert(25)
 // bsTree.insert(7)
 // bsTree.insert(3)
+// console.log(bsTree)
 // console.log(bsTree.search(60))
 // console.log(bsTree.search(5))
 // bsTree.treeTraversePreorder(bsTree.root)
 // bsTree.treeTraverseInorder(bsTree.root)
 // bsTree.treeTraversePostorder(bsTree.root)
 // bsTree.bfsTreeTraverse()
+// bsTree.delete(15)
+// console.log(bsTree)
 // console.log(bsTree.min(bsTree.root))
 // console.log(bsTree.max(bsTree.root))
